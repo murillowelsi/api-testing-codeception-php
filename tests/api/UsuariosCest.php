@@ -2,6 +2,18 @@
 
 class UsuariosCest
 {
+    public function deleteUsuario(ApiTester $I)
+    {
+        $I->sendGet("/usuarios");
+        $usersId = $I->grabDataFromResponseByJsonPath("$.._id");
+
+        foreach ($usersId as $userId) {
+            $I->sendDelete("/usuarios/{$userId}");
+            $I->seeResponseCodeIs(200);
+            $I->seeResponseIsJson();
+        }
+    }
+    
     public function getUsuarios(ApiTester $I)
     {
         $I->sendPost("/usuarios", [
@@ -50,18 +62,6 @@ class UsuariosCest
         $I->sendDelete("/usuarios/{$userId}");
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
-    }
-
-    public function deleteUsuario(ApiTester $I)
-    {
-        $I->sendGet("/usuarios");
-        $usersId = $I->grabDataFromResponseByJsonPath("$.._id");
-
-        foreach ($usersId as $userId) {
-            $I->sendDelete("/usuarios/{$userId}");
-            $I->seeResponseCodeIs(200);
-            $I->seeResponseIsJson();
-        }
     }
 
     public function dbTest(ApiTester $I)
