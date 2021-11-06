@@ -1,0 +1,13 @@
+actor: ApiTester
+modules:
+    enabled:
+        - \Helper\Api
+        - Db:
+            dsn: 'mysql:host=127.0.0.1;dbname=test'
+            user: 'admin'
+            password: ''
+        - REST:
+            url: %BASE_URL_DEV%
+            depends: PhpBrowser
+            part: Json
+        - Asserts
