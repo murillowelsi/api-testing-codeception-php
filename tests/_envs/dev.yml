@@ -6,6 +6,9 @@ modules:
             dsn: 'mysql:host=127.0.0.1;dbname=test'
             user: 'admin'
             password: ''
+            dump: tests/_data/dump_test_db.sql
+            cleanup: true # reload dump between tests
+            populate: true # load dump before all tests
         - REST:
             url: %BASE_URL_DEV%
             depends: PhpBrowser

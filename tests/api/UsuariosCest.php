@@ -13,7 +13,7 @@ class UsuariosCest
             $I->seeResponseIsJson();
         }
     }
-    
+
     public function getUsuarios(ApiTester $I)
     {
         $I->sendPost("/usuarios", [
@@ -62,12 +62,5 @@ class UsuariosCest
         $I->sendDelete("/usuarios/{$userId}");
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
-    }
-
-    public function dbTest(ApiTester $I)
-    {
-        $I->seeInDatabase('users', ['name' => 'Murillo', 'id' => 1]);
-        $I->updateInDatabase('users', array('name' => 'Murillo'), array('id' => 1));
-        $I->updateInDatabase('users', array('name' => 'Cris'), array('id' => 2));
     }
 }
